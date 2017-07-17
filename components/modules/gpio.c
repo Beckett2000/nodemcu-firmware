@@ -42,6 +42,9 @@
 #define PULL_UP 1
 #define PULL_DOWN 2
 
+#define HIGH 1
+#define LOW 0
+
 static int *gpio_cb_refs = NULL; // Lazy init
 static task_handle_t cb_task;
 
@@ -244,6 +247,9 @@ static const LUA_REG_TYPE lgpio_map[] =
   { LSTRKEY( "IN" ),                LNUMVAL( GPIO_MODE_INPUT )        },
   { LSTRKEY( "IN_OUT" ),            LNUMVAL( GPIO_MODE_INPUT_OUTPUT ) },
 
+  { LSTRKEY( "HIGH"),               LNUMVAL(HIGH)                     },
+  { LSTRKEY( "LOW" ),               LNUMVAL(LOW)                      },
+  
   { LSTRKEY( "FLOATING"),           LNUMVAL( 0 )                      },
   { LSTRKEY( "PULL_UP" ),           LNUMVAL( PULL_UP )                },
   { LSTRKEY( "PULL_DOWN" ),         LNUMVAL( PULL_DOWN )              },
