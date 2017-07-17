@@ -135,6 +135,12 @@ config LUA_MODULE_SIGMA_DELTA
       Includes the sigma_delta module. This module provides access to the
       sigma-delta hardware.
 
+config LUA_MODULE_SPI
+  bool "SPI module"
+  default "n"
+  help
+      Includes the spi module.
+
 config LUA_MODULE_STRUCT
   bool "Struct module"
   default "n"
@@ -147,6 +153,14 @@ config LUA_MODULE_TMR
   default "y"
   help
       Includes the timer module (recommended).
+
+config LUA_MODULE_U8G2
+  bool "U8G2 module"
+  default "n"
+  help
+      Includes the u8g2 module.
+
+source "$PROJECT_PATH/components/u8g2/u8g2.kconfig"
 
 config LUA_MODULE_WIFI
   bool "WiFi module"

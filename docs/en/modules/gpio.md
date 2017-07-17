@@ -6,6 +6,13 @@
 
 This module provides access to the [GPIO](https://en.wikipedia.org/wiki/General-purpose_input/output) (General Purpose Input/Output) subsystem.
 
+# GPIO Overview
+The ESP32 chip features 40 physical GPIO pads. Some GPIO pads cannot be used or do not have the corresponding pin on the chip package (refer to the [ESP32 Datasheet](http://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)).
+
+- GPIO6-11 are usually used for SPI flash.
+- GPIO20, GPIO24, and GPIO28-31 are not available as pins.
+- GPIO34-39 can only be set as input mode and do not have software pullup or pulldown functions.
+
 
 ## gpio.config()
 Configure GPIO mode for one or more pins.
@@ -23,7 +30,7 @@ gpio.config({
 #### Parameters
 List of configuration tables:
 
-- `gpio` one or more (given as list) pins, 0 ~ 33 I/O index
+- `gpio` one or more (given as list) pins, see [GPIO Overview](#gpio-overview)
 - `dir` direction, one of
     - `gpio.IN`
     - `gpio.OUT`
@@ -50,7 +57,7 @@ Read digital GPIO pin value.
 `gpio.read(pin)`
 
 #### Parameters
-`pin` pin to read, 0 ~ 33 I/O index
+`pin` pin to read, see [GPIO Overview](#gpio-overview)
 
 #### Returns
 0 = low, 1 = high
@@ -63,13 +70,13 @@ Establish or clear a callback function to run on interrupt for a GPIO.
 `gpio.trig(pin, type [, callback])`
 
 #### Parameters
-- `pin` 0 ~ 33 I/O index
+- `pin`, see [GPIO Overview](#gpio-overview)
 - `type` trigger type, one of
-    - `INTR_UP` for trigger on rising edge
-    - `INTR_DOWN` for trigger on falling edge
-    - `INTR_UP_DOWN` for trigger on both edges
-    - `INTR_LOW` for trigger on low level
-    - `INTR_HIGH` for trigger on high level
+    - `gpio.INTR_UP` for trigger on rising edge
+    - `gpio.INTR_DOWN` for trigger on falling edge
+    - `gpio.INTR_UP_DOWN` for trigger on both edges
+    - `gpio.INTR_LOW` for trigger on low level
+    - `gpio.INTR_HIGH` for trigger on high level
 - `callback` optional function to be called when trigger fires, trigger is disabled when omitted. Parameters are:
     - `pin`
     - `level`
@@ -84,11 +91,11 @@ Configuring wake-from-sleep-on-GPIO-level.
 `gpio.wakeup(pin, level)`
 
 #### Parameters
-- `pin` 0 ~ 33 I/O index
+- `pin`, see [GPIO Overview](#gpio-overview)
 - `level` wake-up level, one of
-    - `INTR_NONE` to disable wake-up
-    - `INTR_LOW` for wake-up on low level
-    - `INTR_HIGH` for wake-up on high level
+    - `gpio.INTR_NONE` to disable wake-up
+    - `gpio.INTR_LOW` for wake-up on low level
+    - `gpio.INTR_HIGH` for wake-up on high level
 
 #### Returns
 `nil`
@@ -101,8 +108,8 @@ Set digital GPIO pin value.
 `gpio.write(pin, level)`
 
 #### Parameters
-- `pin` pin to write, 0 ~ 33 I/O index
-- `level` `gpio.HIGH` or `gpio.LOW`
+- `pin` pin to write, see [GPIO Overview](#gpio-overview)
+- `level` 1 or 0
 
 #### Returns
 `nil`
